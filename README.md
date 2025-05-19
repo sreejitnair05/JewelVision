@@ -1,124 +1,82 @@
-JewelVision: AI-Powered Jewelry Recognition System
-![image](https://github.com/user-attachments/assets/d3787967-9f06-4253-a189-e1cce8ee03cc)
+JewelVision - AI-Powered Jewelry Image Search
+
+Overview
+--------
+JewelVision is a web application that allows users to upload an image of a piece of jewelry and find similar styles using AI-powered image search.  The application uses the CLIP model to extract image features and FAISS for efficient similarity search.
+
+![image](https://github.com/user-attachments/assets/d6855e7b-784f-44c4-a481-4054dd3aab42)
 
 
-Overview:
+Key Features
+------------
+* Image Upload: Users can upload an image of jewelry to find similar items.
+* AI-Powered Search:  Uses the CLIP model to understand the visual content of the image.
+* Similarity Search:  Employs FAISS for fast and efficient similarity search in a database of jewelry images.
+* Results Display:  Displays the uploaded image along with similar jewelry images, including details like filename, jewelry type, and metal used.
+* Responsive UI:  A clean and responsive user interface built with Gradio.
 
-JewelVision is an advanced AI-powered jewelry recognition system that leverages computer vision and deep learning to identify and find similar jewelry styles. Built with OpenAI's CLIP (Contrastive Language-Image Pre-training) and Facebook AI's FAISS (Facebook AI Similarity Search), JewelVision can analyze jewelry images and suggest visually similar items from a catalog.
+Technical Details
+-----------------
+* Python: The application is written in Python inside Google Colab.
+* Libraries:
+    * CLIP:  Used for extracting image features.
+    * FAISS:  Used for similarity search.
+    * Gradio:  Used for creating the web interface.
+    * Pandas:  Used for data manipulation.
+    * PIL (Pillow): Used for image processing.
+    * PyTorch: Used as a backend for CLIP.
+* Image Processing:  Uploaded images are preprocessed before feature extraction.
+* Feature Extraction:  CLIP's image encoding capabilities are used to convert images into feature vectors.
+* Similarity Indexing:  FAISS is used to create an index of image features for fast similarity search.
+* User Interface:  Gradio provides an interactive interface for uploading images and viewing results.
 
-Features:
+Setup and Installation
+----------------------
+1.  **Mount Google Drive:** The notebook assumes that the dataset is located in a Google Drive folder named `JeweleryRecognition`.  The first code cell mounts the user's Google Drive.
+2.  **Define Paths:** The notebook defines the base directory, image directory, and CSV file path.
+3.  **Install Dependencies:** The notebook installs the necessary Python packages, including `ftfy`, `regex`, `tqdm`, `CLIP`, and `faiss-cpu`.
+4.  **Load Data:** The notebook loads the jewelry image data from the CSV file and constructs the filepaths.
+5.  **Extract Image Features:** The CLIP model extracts feature vectors from the images.
+6.  **Build FAISS Index:** A FAISS index is created from the image features.
+7.  **Define Search Function:** The `run_search` function takes an uploaded image, extracts its features, searches the FAISS index for similar images, and displays the results.
+8.  **Define Gradio Interface:** The Gradio library is used to create the web interface, including the image upload component, results display, and back button.
+9.  **Run the Application:** The Gradio interface is launched, making the application accessible through a web browser.
 
-1. AI-Powered Image Recognition: Uses CLIP to extract visual features from jewelry images
-2. Fast Similarity Search: Employs FAISS for efficient nearest-neighbor searches
-3. User-Friendly Interface: Clean, responsive UI built with Gradio
-4: Multi-attribute Classification: Identifies jewelry type and metal used
-5: Real-time Results: Provides instant visual matches with descriptions
+How to Use
+----------
+1.  **Upload Image:** Upload an image of a piece of jewelry using the file upload component.
+2.  **View Results:** The application will display the uploaded image along with similar jewelry images.  Information about the similar images (filename, jewelry type, metal used) will also be shown.
+3.  **Back to Search:** Click the "⬅️ Back to Search" button to upload a new image and perform another search.
 
-How It Works
-JewelVision operates through a multi-step process:
-
-Feature Extraction: The system uses CLIP, a neural network trained on a variety of image-text pairs, to convert jewelry images into rich feature vectors.
-Similarity Index: FAISS creates an efficient index of these feature vectors for quick similarity search.
-Visual Search: When a query image is uploaded, JewelVision extracts its features and searches for the most similar items in the index.
-Results Display: The system presents visually similar jewelry items along with metadata (jewelry type, metal used).
-
-Technical Architecture:
-
-Dependencies:
-
-Python 3.7+
-PyTorch
-OpenAI CLIP
-FAISS-CPU
-Pandas
-Pillow
-Gradio
-Matplotlib
-
-Dataset Structure:
-
-The system uses a dataset with the following structure:
-
-Images/ - Propreitary Directory containing jewelry images
-Labels.csv - CSV file with metadata (FILENAME, JEWELLERY_TYPE, METAL_USED, etc.)
-
-Installation & Setup
-
-1. Clone the Repository
-bash
-git clone https://github.com/yourusername/jewelvision.git
-cd jewelvision
-2. Install Dependencies
-bash
-pip install -r requirements.txt
-pip install git+https://github.com/openai/CLIP.git
-3. Prepare Your Data
-Place your jewelry images in the Images/ directory and create a Labels.csv file with the following columns:
-
-FILENAME
-JEWELLERY_TYPE
-METAL_USED
-4. Run the Application
-bash
-python app.py
-Usage
-Start the application
-Upload a jewelry image through the web interface
-View similar jewelry items with their descriptions
-Use the "Back to Search" button to upload a new image
-Code Explanation
-Feature Extraction with CLIP
-python
-def extract_features(image_paths):
-    features = []
-    for path in tqdm(image_paths):
-        image = preprocess(Image.open(path).convert("RGB")).unsqueeze(0).to(device)
-        with torch.no_grad():
-            feature = model.encode_image(image).cpu().numpy()
-        features.append(feature[0])
-    return features
-This function processes each image through CLIP's encoder to create feature vectors.
-
-Creating the FAISS Index
-python
-features_np = np.array(image_features).astype("float32")
-faiss.normalize_L2(features_np)
-index = faiss.IndexFlatIP(features_np.shape[1])
-index.add(features_np)
-This code normalizes the feature vectors and adds them to a FAISS index for efficient similarity search.
-
-Search Implementation
-python
-def run_search(input_image):
-    # Process the input image
-    img_t = preprocess(input_image.convert("RGB")).unsqueeze(0).to(device)
-    with torch.no_grad():
-        feats = model.encode_image(img_t).cpu().numpy().astype("float32")
-    faiss.normalize_L2(feats)
-    
-    # Search for similar items
-    D, I = index.search(feats, k=5)
-    
-    # Display results
-    # ...
-This function takes a query image, processes it through CLIP, and searches for similar items in the FAISS index.
+Notes
+-----
+* The application assumes that the images and labels are organized in a specific directory structure within Google Drive.
+* The CLIP model used is `ViT-B/32`.
+* The similarity threshold is set to 0.25.  Images with a similarity score below this threshold are not displayed.
+* The application includes a check to verify that the uploaded image is actually jewelry.
 
 Future Improvements
-Add support for text-based jewelry search
-Implement image preprocessing for better accuracy
-Expand the dataset to cover more jewelry types
-Add filtering options (by type, metal, etc.)
-Deploy as a standalone web application or mobile app
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+-------------------
+* **Expanded Dataset:** Increase the size and diversity of the jewelry image dataset to improve the accuracy and robustness of the search results.
+* **Refined Similarity Metrics:** Experiment with different similarity metrics and ranking algorithms to provide more relevant search results.
+* **Jewelry Type Classification:** Add a feature to automatically classify the type of jewelry (e.g., ring, necklace, earring) in the uploaded image.
+* **Metal and Gemstone Detection:** Implement functionality to identify the types of metal and gemstones present in the jewelry.
+* **3D Model Integration:** Integrate 3D models of jewelry to provide a more immersive viewing experience.
+* **User Accounts and History:** Allow users to create accounts and save their search history.
+* **API Development:** Develop an API to allow other applications to use the jewelry search functionality.
+* **Performance Optimization:** Optimize the application for faster search and response times.
+* **Mobile Responsiveness:** Enhance the mobile responsiveness of the user interface.
 
-Acknowledgments
-OpenAI CLIP for the vision-language model
-Facebook AI FAISS for similarity search
-Gradio for the web interface
 Contact
-Your Name - sreejitnair05@gmail.com
-Linkedin: https://www.linkedin.com/in/sreejit-gopinath-nair-721a4a229/
-Project Link: https://github.com/sreejitnair05/JewelVision
-If you find this project useful, please consider giving it a star ⭐️
+-------
+* LinkedIn: https://www.linkedin.com/in/sreejit-gopinath-nair-721a4a229/
+* Email:   sreejitnair05@gmail.com
 
+Repository
+----------
+* GitHub:  https://github.com/sreejitnair05/JewelVision
+
+Support
+-------
+If you found this project helpful, please consider giving it a star on GitHub! ⭐
+ 
