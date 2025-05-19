@@ -32,7 +32,7 @@ Technical Details
 
 Setup and Installation
 ----------------------
-1.  **Mount Google Drive:** The notebook assumes that the dataset is located in a Google Drive folder named `JeweleryRecognition`.  The first code cell mounts the user's Google Drive.
+1.  **Mount Google Drive:** The notebook assumes that the dataset is located in a Google Drive folder named `JeweleryRecognition`, so the same needs to be uploaded there.  The first code cell mounts the user's Google Drive.
 2.  **Define Paths:** The notebook defines the base directory, image directory, and CSV file path.
 3.  **Install Dependencies:** The notebook installs the necessary Python packages, including `ftfy`, `regex`, `tqdm`, `CLIP`, and `faiss-cpu`.
 4.  **Load Data:** The notebook loads the jewelry image data from the CSV file and constructs the filepaths.
