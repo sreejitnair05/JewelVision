@@ -2,15 +2,18 @@ JewelVision: AI-Powered Jewelry Recognition System
 ![image](https://github.com/user-attachments/assets/d3787967-9f06-4253-a189-e1cce8ee03cc)
 
 
-Overview
+Overview:
+
 JewelVision is an advanced AI-powered jewelry recognition system that leverages computer vision and deep learning to identify and find similar jewelry styles. Built with OpenAI's CLIP (Contrastive Language-Image Pre-training) and Facebook AI's FAISS (Facebook AI Similarity Search), JewelVision can analyze jewelry images and suggest visually similar items from a catalog.
 
-Features
-AI-Powered Image Recognition: Uses CLIP to extract visual features from jewelry images
-Fast Similarity Search: Employs FAISS for efficient nearest-neighbor searches
-User-Friendly Interface: Clean, responsive UI built with Gradio
-Multi-attribute Classification: Identifies jewelry type and metal used
-Real-time Results: Provides instant visual matches with descriptions
+Features:
+
+1. AI-Powered Image Recognition: Uses CLIP to extract visual features from jewelry images
+2. Fast Similarity Search: Employs FAISS for efficient nearest-neighbor searches
+3. User-Friendly Interface: Clean, responsive UI built with Gradio
+4: Multi-attribute Classification: Identifies jewelry type and metal used
+5: Real-time Results: Provides instant visual matches with descriptions
+
 How It Works
 JewelVision operates through a multi-step process:
 
@@ -18,8 +21,11 @@ Feature Extraction: The system uses CLIP, a neural network trained on a variety 
 Similarity Index: FAISS creates an efficient index of these feature vectors for quick similarity search.
 Visual Search: When a query image is uploaded, JewelVision extracts its features and searches for the most similar items in the index.
 Results Display: The system presents visually similar jewelry items along with metadata (jewelry type, metal used).
-Technical Architecture
-Dependencies
+
+Technical Architecture:
+
+Dependencies:
+
 Python 3.7+
 PyTorch
 OpenAI CLIP
@@ -28,12 +34,16 @@ Pandas
 Pillow
 Gradio
 Matplotlib
-Dataset Structure
+
+Dataset Structure:
+
 The system uses a dataset with the following structure:
 
 Images/ - Propreitary Directory containing jewelry images
 Labels.csv - CSV file with metadata (FILENAME, JEWELLERY_TYPE, METAL_USED, etc.)
+
 Installation & Setup
+
 1. Clone the Repository
 bash
 git clone https://github.com/yourusername/jewelvision.git
@@ -107,7 +117,8 @@ OpenAI CLIP for the vision-language model
 Facebook AI FAISS for similarity search
 Gradio for the web interface
 Contact
-Your Name - your.email@example.com
-Project Link: https://github.com/yourusername/jewelvision
+Your Name - sreejitnair05@gmail.com
+Linkedin: https://www.linkedin.com/in/sreejit-gopinath-nair-721a4a229/
+Project Link: https://github.com/sreejitnair05/JewelVision
 If you find this project useful, please consider giving it a star ⭐️
 
