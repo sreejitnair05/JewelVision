@@ -61,9 +61,6 @@ Future Improvements
 * **Refined Similarity Metrics:** Experiment with different similarity metrics and ranking algorithms to provide more relevant search results.
 * **Jewelry Type Classification:** Add a feature to automatically classify the type of jewelry (e.g., ring, necklace, earring) in the uploaded image.
 * **Metal and Gemstone Detection:** Implement functionality to identify the types of metal and gemstones present in the jewelry.
-* **3D Model Integration:** Integrate 3D models of jewelry to provide a more immersive viewing experience.
-* **User Accounts and History:** Allow users to create accounts and save their search history.
-* **API Development:** Develop an API to allow other applications to use the jewelry search functionality.
 * **Performance Optimization:** Optimize the application for faster search and response times.
 * **Mobile Responsiveness:** Enhance the mobile responsiveness of the user interface.
 
